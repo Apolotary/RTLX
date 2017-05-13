@@ -388,6 +388,18 @@ function buttonPart1()
 		}
 	}
 
+	if (document.getElementById("Flat").checked == false && document.getElementById("Space").checked == false)
+	{
+		alert('An application type must be chosen!');
+		return false;
+	}
+
+	if (document.getElementById("Viewer").checked == false && document.getElementById("Streamer").checked == false)
+	{
+		alert('An user type must be chosen!');
+		return false;
+	}
+
 	// Bye bye part 1, hello part 2
 	document.getElementById('div_part1').style.display = 'none';
 	//document.getElementById('div_part2').style.display = '';
@@ -506,9 +518,27 @@ function getResultsHTML()
 	result += results_overall;
 	result += "<br/>";
 
+
 	var blob = new Blob([result], {type: "text/plain;charset=utf-8"});
 
-	saveAs(blob, Date.now() + ".htm");
+	var userType = "Streamer";
+	var appName = "Flat";
+	var otherApp = "Space";
+
+	if (document.getElementById("Flat").checked == false)
+	{
+		appName = "Space";
+		otherApp = "Flat";
+	}
+
+	if (document.getElementById("Streamer").checked == false)
+	{
+		userType = "Viewer";
+	}
+	result += "<br/>";
+	result += "Please reload the page again to answer the questionnaire for " + userType + " " + otherApp + " application.";
+
+	saveAs(blob, userType + "_" + appName + "_" + Date.now() + ".htm");
 
 	return result;
 }
@@ -612,6 +642,63 @@ input.pair
   <br>
   Click on each scale at the point that best indicates your experience of the task <br>
   <br>
+
+	Please choose your role:
+	<br>
+	<input id="Viewer" type="checkbox" onClick="javascript:uncheckStreamer(this);">
+	<label for="Viewer">Viewer</label>
+	<br>
+	<input id="Streamer" type="checkbox" onClick="javascript:uncheckViewer(this);">
+	<label for="Streamer">Streamer</label>
+	<br>
+	<br>
+	Please choose your application type:
+	<br>
+	<input id="Flat" type="checkbox" onClick="javascript:uncheckSpace(this);">
+	<label for="Flat">Flat (regular videoconferencing)</label>
+	<br>
+	<input id="Space" type="checkbox" onClick="javascript:uncheckFlat(this);">
+	<label for="Space">Space (panoramic app)</label>
+	<br>
+
+	<script language="javascript" type="text/javascript">
+	function uncheckStreamer(obj)
+  {
+			if (document.getElementById("Streamer").checked == true)
+			{
+				document.getElementById("Streamer").checked = false;
+				document.getElementById("Viewer").checked = true;
+			}
+  }
+
+	function uncheckViewer(obj)
+	{
+			if (document.getElementById("Viewer").checked == true)
+			{
+				document.getElementById("Viewer").checked = false;
+				document.getElementById("Streamer").checked = true;
+			}
+	}
+
+	function uncheckFlat(obj)
+	{
+			if (document.getElementById("Flat").checked == true)
+			{
+				document.getElementById("Flat").checked = false;
+				document.getElementById("Space").checked = true;
+			}
+	}
+
+	function uncheckSpace(obj)
+	{
+			if (document.getElementById("Space").checked == true)
+			{
+				document.getElementById("Space").checked = false;
+				document.getElementById("Flat").checked = true;
+			}
+	}
+	</script>
+	<br>
 
   <div id="scale0"><table><tbody><tr><td><table class="scale"><tbody><tr><td colspan="20" class="heading">Mental Demand</td></tr><tr><td id="t_0_5" class="top1" onmouseup="scaleClick(0, 5);"></td><td id="t_0_10" class="top2" onmouseup="scaleClick(0, 10);"></td><td id="t_0_15" class="top1" onmouseup="scaleClick(0, 15);"></td><td id="t_0_20" class="top2" onmouseup="scaleClick(0, 20);"></td><td id="t_0_25" class="top1" onmouseup="scaleClick(0, 25);"></td><td id="t_0_30" class="top2" onmouseup="scaleClick(0, 30);"></td><td id="t_0_35" class="top1" onmouseup="scaleClick(0, 35);"></td><td id="t_0_40" class="top2" onmouseup="scaleClick(0, 40);"></td><td id="t_0_45" class="top1" onmouseup="scaleClick(0, 45);"></td><td id="t_0_50" class="top2" onmouseup="scaleClick(0, 50);"></td><td id="t_0_55" class="top1" onmouseup="scaleClick(0, 55);"></td><td id="t_0_60" class="top2" onmouseup="scaleClick(0, 60);"></td><td id="t_0_65" class="top1" onmouseup="scaleClick(0, 65);"></td><td id="t_0_70" class="top2" onmouseup="scaleClick(0, 70);"></td><td id="t_0_75" class="top1" onmouseup="scaleClick(0, 75);"></td><td id="t_0_80" class="top2" onmouseup="scaleClick(0, 80);"></td><td id="t_0_85" class="top1" onmouseup="scaleClick(0, 85);"></td><td id="t_0_90" class="top2" onmouseup="scaleClick(0, 90);"></td><td id="t_0_95" class="top1" onmouseup="scaleClick(0, 95);"></td><td id="t_0_100" class="top2" onmouseup="scaleClick(0, 100);"></td></tr><tr><td id="b_0_5" class="bottom" onmouseup="scaleClick(0, 5);"></td><td id="b_0_10" class="bottom" onmouseup="scaleClick(0, 10);"></td><td id="b_0_15" class="bottom" onmouseup="scaleClick(0, 15);"></td><td id="b_0_20" class="bottom" onmouseup="scaleClick(0, 20);"></td><td id="b_0_25" class="bottom" onmouseup="scaleClick(0, 25);"></td><td id="b_0_30" class="bottom" onmouseup="scaleClick(0, 30);"></td><td id="b_0_35" class="bottom" onmouseup="scaleClick(0, 35);"></td><td id="b_0_40" class="bottom" onmouseup="scaleClick(0, 40);"></td><td id="b_0_45" class="bottom" onmouseup="scaleClick(0, 45);"></td><td id="b_0_50" class="bottom" onmouseup="scaleClick(0, 50);"></td><td id="b_0_55" class="bottom" onmouseup="scaleClick(0, 55);"></td><td id="b_0_60" class="bottom" onmouseup="scaleClick(0, 60);"></td><td id="b_0_65" class="bottom" onmouseup="scaleClick(0, 65);"></td><td id="b_0_70" class="bottom" onmouseup="scaleClick(0, 70);"></td><td id="b_0_75" class="bottom" onmouseup="scaleClick(0, 75);"></td><td id="b_0_80" class="bottom" onmouseup="scaleClick(0, 80);"></td><td id="b_0_85" class="bottom" onmouseup="scaleClick(0, 85);"></td><td id="b_0_90" class="bottom" onmouseup="scaleClick(0, 90);"></td><td id="b_0_95" class="bottom" onmouseup="scaleClick(0, 95);"></td><td id="b_0_100" class="bottom" onmouseup="scaleClick(0, 100);"></td></tr><tr><td colspan="10" class="left">Low</td><td colspan="10" class="right">High</td></tr></tbody></table></td><td class="def">How much mental and perceptual activity was required (e.g. thinking, deciding, calculating, remembering, looking, searching, etc)? Was the task easy or demanding, simple or complex, exacting or forgiving?</td></tr></tbody></table></div>
   <div id="scale1"><table><tbody><tr><td><table class="scale"><tbody><tr><td colspan="20" class="heading">Physical Demand</td></tr><tr><td id="t_1_5" class="top1" onmouseup="scaleClick(1, 5);"></td><td id="t_1_10" class="top2" onmouseup="scaleClick(1, 10);"></td><td id="t_1_15" class="top1" onmouseup="scaleClick(1, 15);"></td><td id="t_1_20" class="top2" onmouseup="scaleClick(1, 20);"></td><td id="t_1_25" class="top1" onmouseup="scaleClick(1, 25);"></td><td id="t_1_30" class="top2" onmouseup="scaleClick(1, 30);"></td><td id="t_1_35" class="top1" onmouseup="scaleClick(1, 35);"></td><td id="t_1_40" class="top2" onmouseup="scaleClick(1, 40);"></td><td id="t_1_45" class="top1" onmouseup="scaleClick(1, 45);"></td><td id="t_1_50" class="top2" onmouseup="scaleClick(1, 50);"></td><td id="t_1_55" class="top1" onmouseup="scaleClick(1, 55);"></td><td id="t_1_60" class="top2" onmouseup="scaleClick(1, 60);"></td><td id="t_1_65" class="top1" onmouseup="scaleClick(1, 65);"></td><td id="t_1_70" class="top2" onmouseup="scaleClick(1, 70);"></td><td id="t_1_75" class="top1" onmouseup="scaleClick(1, 75);"></td><td id="t_1_80" class="top2" onmouseup="scaleClick(1, 80);"></td><td id="t_1_85" class="top1" onmouseup="scaleClick(1, 85);"></td><td id="t_1_90" class="top2" onmouseup="scaleClick(1, 90);"></td><td id="t_1_95" class="top1" onmouseup="scaleClick(1, 95);"></td><td id="t_1_100" class="top2" onmouseup="scaleClick(1, 100);"></td></tr><tr><td id="b_1_5" class="bottom" onmouseup="scaleClick(1, 5);"></td><td id="b_1_10" class="bottom" onmouseup="scaleClick(1, 10);"></td><td id="b_1_15" class="bottom" onmouseup="scaleClick(1, 15);"></td><td id="b_1_20" class="bottom" onmouseup="scaleClick(1, 20);"></td><td id="b_1_25" class="bottom" onmouseup="scaleClick(1, 25);"></td><td id="b_1_30" class="bottom" onmouseup="scaleClick(1, 30);"></td><td id="b_1_35" class="bottom" onmouseup="scaleClick(1, 35);"></td><td id="b_1_40" class="bottom" onmouseup="scaleClick(1, 40);"></td><td id="b_1_45" class="bottom" onmouseup="scaleClick(1, 45);"></td><td id="b_1_50" class="bottom" onmouseup="scaleClick(1, 50);"></td><td id="b_1_55" class="bottom" onmouseup="scaleClick(1, 55);"></td><td id="b_1_60" class="bottom" onmouseup="scaleClick(1, 60);"></td><td id="b_1_65" class="bottom" onmouseup="scaleClick(1, 65);"></td><td id="b_1_70" class="bottom" onmouseup="scaleClick(1, 70);"></td><td id="b_1_75" class="bottom" onmouseup="scaleClick(1, 75);"></td><td id="b_1_80" class="bottom" onmouseup="scaleClick(1, 80);"></td><td id="b_1_85" class="bottom" onmouseup="scaleClick(1, 85);"></td><td id="b_1_90" class="bottom" onmouseup="scaleClick(1, 90);"></td><td id="b_1_95" class="bottom" onmouseup="scaleClick(1, 95);"></td><td id="b_1_100" class="bottom" onmouseup="scaleClick(1, 100);"></td></tr><tr><td colspan="10" class="left">Low</td><td colspan="10" class="right">High</td></tr></tbody></table></td><td class="def">How much physical activity was required (e.g. pushing, pulling, turning, controlling, activating, etc)? Was the task easy or demanding, slow or brisk, slack or strenuous, restful or laborious?</td></tr></tbody></table></div>
